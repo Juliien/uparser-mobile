@@ -3,7 +3,6 @@ package com.esgi.uparser
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.esgi.uparser.api.Api
