@@ -31,52 +31,22 @@ class MainActivity : AppCompatActivity() {
             && username.isNotBlank() && password.isNotBlank()) {
 
             val loginService = AuthenticationService()
-//            val userService = UserService(this.applicationContext)
-
             var response: JsonObject?
 
-            loginService.testCo() { res ->
-                response = res
+            loginService.login(LoginModel(username, password)) { loginResponse ->
+                response = loginResponse
                 if (response !== null) {
+//                    AppPreferences.isLogin = true
+//                    AppPreferences.token = response?.get("token").toString()
+//                    this.startActivity(Intent(this, MainActivity::class.java))
+                } else {
                     Toast.makeText(
                         applicationContext,
-                        response.toString(),
+                        "Login Failed ! ",
                         Toast.LENGTH_LONG
                     ).show()
                 }
             }
-//            loginService.login(LoginModel(username, password)) { loginResponse ->
-//                response = loginResponse
-//                if (response !== null) {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        response.toString(),
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                    AppPreferences.isLogin = true
-//                    AppPreferences.token = response?.get("token").toString()
-//                    AppPreferences._id = response?.get("uid").toString()
-//                    userService.getUser { res ->
-//                        if (res !== null) {
-//                            AppPreferences.user = UserModel(
-//                                res.get("_id").toString(),
-//                                res.get("login").toString(),
-//                                res.get("password").toString(),
-//                                res.get("email").toString(),
-//                                res.get("isAdmin").asBoolean,
-//                                res.get("isStaff").asBoolean
-//                            )
-//                        }
-//                    }
-//                    this.startActivity(Intent(this, MainActivity::class.java))
-//                } else {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        "Login Failed ! ",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                }
-            }
         }
-
+    }
 }
