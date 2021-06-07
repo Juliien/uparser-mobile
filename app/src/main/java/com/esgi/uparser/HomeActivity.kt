@@ -3,6 +3,7 @@ package com.esgi.uparser
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.esgi.uparser.api.Api
@@ -15,6 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.StringBuilder
 
 class HomeActivity : AppCompatActivity() {
     lateinit var tabLayout: TabLayout
@@ -24,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://10.0.2.2:3001/api/v1/").build()
         val jsonapi = retrofit.create(Api::class.java)
-        val mcall: Call<List<User>> = jsonapi.getInfoUser("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWxpZW5AZ21haWwuY29tIiwicm9sZXMiOlt7ImlkIjoiNjA5ODAxMDQ0NGViNjgxZTgwNDE4MTkyIiwicm9sZSI6IlVTRVIifV0sImlhdCI6MTYyMjkxODY5MSwiZXhwIjoxNjIyOTIyMjkxfQ.xi67lUmSgtxACqFlxGATc7JIj1z7_yXzCVsSGE3-8sVhp1Ns8T3K3xzxYbqhKPfYijU-4AJ5e438mXAf72a2Gg")
+        val mcall: Call<List<User>> = jsonapi.getInfoUser("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWxpZW5AZ21haWwuY29tIiwicm9sZXMiOlt7ImlkIjoiNjA5ODAxMDQ0NGViNjgxZTgwNDE4MTkyIiwicm9sZSI6IlVTRVIifV0sImlhdCI6MTYyMjk4MDM5MywiZXhwIjoxNjIyOTgzOTkzfQ.S3tlrd5yqW5uQSNgXkzrwzlmF3WIvLW6_gAdsCI7BTNkmJjfQYfNwkKTxBxR6b6Uijo45eGu-F-NL3P6UMEmLQ")
 
         mcall.enqueue(object : Callback<List<User>>
         {
@@ -33,31 +35,26 @@ class HomeActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-                /*val mmodel:List<User> = response.body()!!
-                val stringBuilder = StringBuilder()
-                for (i in mmodel){
-                    stringBuilder.append(i.id)
-                    /*stringBuilder.append("\n")
-                    stringBuilder.append(i.firstName)
-                    stringBuilder.append("\n")
-                    stringBuilder.append(i.lastName)
-                    stringBuilder.append("\n")
-                    stringBuilder.append(i.email)
-                    stringBuilder.append("\n")
-                    stringBuilder.append(i.Date)
-                    stringBuilder.append("\n")
-                    stringBuilder.append(i.createDate)
-                    stringBuilder.append("\n")
-                    stringBuilder.append(i.lastLoginDate)*/
+                if (response.code() == 200) {
+                    val users:List<User> = response.body()!!
+                    val stringBuilder = StringBuilder()
+                    for (i in users) {
+                        stringBuilder.append(i.id)
+                        val textView: TextView = findViewById(R.id.personalinfos) as TextView
+                        textView.text = stringBuilder
 
-                }*/
-
-                val stringBuilder = response.body().toString()
-                val textView: TextView = findViewById(R.id.personalinfos) as TextView
-                textView.text = stringBuilder
+                    }
 
 
-                /*findViewById(R.id.personalinfos).setText(stringBuilder)*/
+
+                }
+                else{
+
+                    val stringBuilder = response.code()
+                    val textView: TextView = findViewById(R.id.personalinfos) as TextView
+                    textView.text = stringBuilder.toString()}
+
+
 
 
             }
