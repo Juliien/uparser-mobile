@@ -1,6 +1,7 @@
 package com.esgi.uparser
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 if (response !== null) {
 //                    AppPreferences.isLogin = true
 //                    AppPreferences.token = response?.get("token").toString()
-//                    this.startActivity(Intent(this, MainActivity::class.java))
+                    this.startActivity(Intent(this, HomeActivity::class.java))
                 } else {
                     Toast.makeText(
                         applicationContext,
