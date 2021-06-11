@@ -1,53 +1,42 @@
 package com.esgi.uparser
 
-
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import com.esgi.uparser.api.user.model.LoginModel
-import com.esgi.uparser.api.user.service.AuthenticationService
-import com.google.gson.JsonObject
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentFactory
+import com.esgi.uparser.fragments.CatalogueFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val usernameInput = findViewById<EditText>(R.id.Login)
-        val passwordInput = findViewById<EditText>(R.id.password)
-        val submitButton = findViewById<Button>(R.id.ButtonLogin)
+//        AppPreferences.init(this)
+        setContentView(R.layout.main_activity)
 
-        submitButton.setOnClickListener {
-            login(usernameInput, passwordInput)
-        }
+        loadFragment(CatalogueFragment())
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-    }
-    private fun login(usernameInput: EditText, passwordInput: EditText) {
-        val username = usernameInput.text.toString()
-        val password = passwordInput.text.toString()
-
-        if (username.isNotEmpty() && password.isNotEmpty()
-            && username.isNotBlank() && password.isNotBlank()) {
-
-            val loginService = AuthenticationService()
-            var response: JsonObject?
-
-            loginService.login(LoginModel(username, password)) { loginResponse ->
-                response = loginResponse
-                if (response !== null) {
-//                    AppPreferences.isLogin = true
-//                    AppPreferences.token = response?.get("token").toString()
-                    this.startActivity(Intent(this, HomeActivity::class.java))
-                } else {
-                    Toast.makeText(
-                        applicationContext,
-                        "Login Failed ! ",
-                        Toast.LENGTH_LONG
-                    ).show()
+        bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_catalogue -> {
+                    loadFragment(CatalogueFragment())
+                    true
                 }
+                R.id.navigation_profile -> {
+                    true
+                }
+                else -> false
             }
         }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        // load fragment
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_content, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }
