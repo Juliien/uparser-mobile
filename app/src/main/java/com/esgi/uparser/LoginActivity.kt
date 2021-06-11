@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.esgi.uparser.api.user.model.LoginModel
 import com.esgi.uparser.api.user.service.AuthenticationService
 import com.google.gson.JsonObject
-import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,8 +22,8 @@ class LoginActivity : AppCompatActivity() {
         submitButton.setOnClickListener {
             login(usernameInput, passwordInput)
         }
-
     }
+
     private fun login(usernameInput: EditText, passwordInput: EditText) {
         val username = usernameInput.text.toString()
         val password = passwordInput.text.toString()

@@ -3,8 +3,8 @@ package com.esgi.uparser
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentFactory
 import com.esgi.uparser.fragments.CatalogueFragment
+import com.esgi.uparser.fragments.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 //        AppPreferences.init(this)
         setContentView(R.layout.main_activity)
+        loadFragment(HomeFragment())
 
-        loadFragment(CatalogueFragment())
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
@@ -24,7 +24,12 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(CatalogueFragment())
                     true
                 }
+                R.id.navigation_home -> {
+                    loadFragment(HomeFragment())
+                    true
+                }
                 R.id.navigation_profile -> {
+//                    loadFragment()
                     true
                 }
                 else -> false
@@ -33,7 +38,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        // load fragment
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_content, fragment)
         transaction.addToBackStack(null)
