@@ -7,6 +7,6 @@
         android:id="@+id/navigation_catalogue"
         android:title="@string/catalogue" />
     <item
-        android:id="@+id/navigation_profile"
-        android:title="@string/profile" />
+        android:id="@+id/navigation_connection"
+        android:title="@string/connection" />
 </menu>
