@@ -3,8 +3,11 @@ package com.esgi.uparser
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.esgi.uparser.api.provider.AppPreferences
 import com.esgi.uparser.fragments.CatalogueFragment
 import com.esgi.uparser.fragments.HomeFragment
+import com.esgi.uparser.fragments.LoginFragment
+import com.esgi.uparser.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -12,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        AppPreferences.init(this)
+        AppPreferences.init(this)
         setContentView(R.layout.main_activity)
         loadFragment(HomeFragment())
 
@@ -28,8 +31,12 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(HomeFragment())
                     true
                 }
-                R.id.navigation_profile -> {
-//                    loadFragment()
+                R.id.navigation_connection -> {
+                    if(!AppPreferences.isLogin) {
+                        loadFragment(LoginFragment())
+                    } else {
+                        loadFragment(ProfileFragment())
+                    }
                     true
                 }
                 else -> false
