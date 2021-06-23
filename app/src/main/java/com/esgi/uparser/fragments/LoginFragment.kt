@@ -16,7 +16,7 @@ import com.esgi.uparser.api.user.model.LoginModel
 import com.esgi.uparser.api.user.service.AuthenticationService
 import com.google.gson.JsonObject
 
-class LoginFragment : Fragment() {
+class  LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,8 +47,8 @@ class LoginFragment : Fragment() {
             val loginService = AuthenticationService()
             var response: JsonObject?
 
-            loginService.login(LoginModel(username, password)) { loginResponse ->
-                response = loginResponse
+            loginService.login(LoginModel(username, password)) {
+                loginResponse -> response = loginResponse
                 if (response !== null) {
                     AppPreferences.isLogin = true
                     AppPreferences.token = response?.get("token").toString()

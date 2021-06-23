@@ -13,17 +13,17 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProfileService {
-    fun getInfoUser(UserData: UserModel, onResult: (JsonObject?) -> Unit) {
+    fun getInfoUser() {
         val call: Call<JsonObject> = ApiClient.buildService(ProfileInterface::class.java).getInfoUser(AppPreferences.token)
 
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>?, response: Response<JsonObject>?) {
                 Log.d("Profile", "Success ${response?.body().toString()}")
-                onResult(response?.body())
+                //onResult(response?.body())
             }
             override fun onFailure(call: Call<JsonObject>?, t: Throwable?) {
                 Log.d("Profile", "Failure ${call?.request()}")
-                onResult(null)
+                //onResult(null)
             }
         })
     }

@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/connexion_page"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:elevation="4dp">
+    android:elevation="4dp"
+    android:background="#FFFDFD">
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="169dp"
-        android:layout_height="171dp"
+        android:layout_width="301dp"
+        android:layout_height="58dp"
         android:background="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.142" />
+        app:layout_constraintVertical_bias="0.184" />
 
     <TextView
         android:id="@+id/headline"
         android:layout_width="187dp"
         android:layout_height="21dp"
         android:gravity="center|top"
-        android:text="@string/app_brand"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -34,17 +36,22 @@
         android:layout_width="240dp"
         android:layout_height="45dp"
         android:inputType="textEmailAddress"
+        android:background="@drawable/edit_text_background"
         android:hint="@string/email_input"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headline"
-        app:layout_constraintVertical_bias="0.165" />
+        app:layout_constraintVertical_bias="0.165"
+        android:drawableLeft="@drawable/ic_user" />
 
     <android.widget.Button
         android:id="@+id/login_submit"
-        android:layout_width="240dp"
-        android:layout_height="60dp"
+        android:layout_width="198dp"
+        android:layout_height="41dp"
+        android:background="@drawable/edit_text_background"
         android:text="@string/login_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -58,11 +65,15 @@
         android:layout_height="45dp"
         android:hint="@string/password_input"
         android:inputType="textPassword"
+        android:background="@drawable/edit_text_background"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/outlined_email"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintVertical_bias="0.068"
+        android:drawableLeft="@drawable/ic_password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

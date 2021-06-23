@@ -4,7 +4,7 @@
     <string name="email_input">Email</string>
     <string name="password_input">Mot de passe</string>
     <string name="login_btn">Connexion</string>
-    <string name="catalogue">Catalogue</string>
+    <string name="catalogue">Catalogues</string>
     <string name="profile">Profil</string>
     <string name="connection">Connexion</string>
     <string name="home">Accueil</string>
