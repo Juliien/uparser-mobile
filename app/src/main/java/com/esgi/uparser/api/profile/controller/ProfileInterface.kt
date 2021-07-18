@@ -9,5 +9,5 @@ import retrofit2.http.*
 interface ProfileInterface {
     @Headers("Content-Type: application/json")
     @GET(value = "user")
-    fun  getInfoUser(@Query("email") email:String) :Call<JsonObject>
+    fun getInfoUser(@Header("Authorization") authorization: String, @Query(encoded = true,value = "email") email:String) :Call<JsonObject>
 }
