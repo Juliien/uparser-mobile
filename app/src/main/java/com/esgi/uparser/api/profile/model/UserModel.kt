@@ -9,7 +9,7 @@ data class UserModel(
     val lastName:String,
     val email:String,
     val password:String,
-    val createDate: LocalDate,
-    val Date: Date,
-    val lastLoginDate: Date
+    val createDate: String,
+    val Date: String,
+    val lastLoginDate: String
 )

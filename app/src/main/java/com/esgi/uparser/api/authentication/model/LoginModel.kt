@@ -1,4 +1,4 @@
-package com.esgi.uparser.api.user.model
+package com.esgi.uparser.api.authentication.model
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
