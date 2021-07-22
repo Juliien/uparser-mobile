@@ -13,6 +13,7 @@ import com.esgi.uparser.api.authentication.model.LoginModel
 import com.esgi.uparser.api.authentication.model.TokenResponse
 import com.esgi.uparser.api.authentication.service.AuthenticationService
 import com.esgi.uparser.api.provider.AppPreferences
+import com.esgi.uparser.api.session.service.SessionService
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,8 +26,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        AppPreferences.init(this)
 
         val emailInput = findViewById<EditText>(R.id.outlined_email)
         val passwordInput = findViewById<EditText>(R.id.outlined_password)
@@ -46,9 +45,11 @@ class LoginActivity : AppCompatActivity() {
             loginService.login(LoginModel(email = email, password = password), object :
                 Callback<TokenResponse> {
                 override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
-                    Log.d("Uparser", "Success login ${response.body()?.token}")
                     if (response.body()?.token != null) {
                         AppPreferences.token = response.body()?.token!!
+                        val tokenResponse = SessionService().retrieveUserInfoViaToken(AppPreferences.token);
+                        AppPreferences.email = tokenResponse.email;
+                        AppPreferences.id = tokenResponse.userId;
                         isResultValid = true
                         UserDetailActivity.navigateTo(this@LoginActivity)
                     } else {
