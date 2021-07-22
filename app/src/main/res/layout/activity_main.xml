@@ -19,39 +19,141 @@
             android:layout_height="wrap_content">
 
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="190dp"
                     android:orientation="horizontal"
                     tools:ignore="MissingConstraints">
 
                     <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/home_bg"
+                        android:layout_gravity="center_horizontal"
+                        />
+
+                    <ImageView
                         android:layout_width="176dp"
                         android:layout_height="match_parent"
-                        android:background="@drawable/logo"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="120dp"/>
+                        android:layout_marginLeft="120dp"
+                        android:background="@drawable/logo" />
 
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="70dp">
 
-                    <TextView
-                        android:id="@+id/textView"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="111dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="176dp"
+                        android:layout_height="108dp"
+                        android:src="@drawable/download_icon"
+                        app:civ_border_color="#2196F3"
+                        app:civ_border_width="1dp" />
+
+                    <LinearLayout
+                        android:layout_width="230dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="18dp"
+                            android:text="@string/commentcamarchetitle" />
+
+                        <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:text="@string/commentcamarche" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="111dp"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="176dp"
+                        android:layout_height="108dp"
+                        android:src="@drawable/parser_icon"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="#2196F3"/>
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="172dp"
-                        android:text="TextView" />
-                </androidx.cardview.widget.CardView>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="18dp"
+                            android:text="@string/parsertitle" />
+
+                        <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:text="@string/parser" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="111dp"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="176dp"
+                        android:layout_height="108dp"
+                        android:src="@drawable/code_icon"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="#2196F3"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="18dp"
+                            android:text="@string/devtitle" />
+
+                        <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:text="@string/dev" />
+                    </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -66,6 +168,7 @@
         android:layout_height="@dimen/fragmentMainMenuHeight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout="@layout/fragment_main_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
