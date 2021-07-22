@@ -1,4 +1,4 @@
-package com.esgi.uparser.api.code.model
+package com.esgi.uparser.api.catalog.model
 
 import com.google.gson.annotations.SerializedName
 

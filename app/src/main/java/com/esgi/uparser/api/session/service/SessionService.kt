@@ -1,5 +1,7 @@
 package com.esgi.uparser.api.session.service
 
+import android.content.Context
+import com.esgi.uparser.LoginActivity
 import com.esgi.uparser.api.profile.service.ProfileService
 import com.esgi.uparser.api.provider.AppPreferences
 import com.esgi.uparser.api.token.JWTUtils
@@ -10,15 +12,16 @@ import retrofit2.Response
 
 class SessionService {
 
-    fun deleteInvalidToken() {
+    fun deleteToken() {
         AppPreferences.clear("token")
     }
 
-    fun testUserToken(userToken: String) {
+    fun testUserToken(userToken: String): Boolean {
+        var isValid: Boolean = false
         val tokenResponse = JWTUtils.decoded(userToken);
         if (tokenResponse.userId == "" || tokenResponse.email == "") {
-            deleteInvalidToken()
-            return
+            deleteToken()
+            return isValid
         }
         val email = tokenResponse.email
         val profileService = ProfileService();
@@ -26,13 +29,23 @@ class SessionService {
         profileService.getUserByEmail(userToken, email, object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.body() == null){
-                    deleteInvalidToken()
+                    deleteToken()
+                    isValid = false
+                } else {
+                    isValid = true
                 }
             }
 
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                deleteInvalidToken()
+                deleteToken()
+                isValid = false
             }
         })
+        return isValid;
+    }
+
+    fun disconnect(context: Context) {
+        deleteToken()
+        LoginActivity.navigateTo(context)
     }
 }
