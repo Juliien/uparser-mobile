@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fragmentMainMenuHeight">65dp</dimen>
+    <dimen name="arrow_back_fragment_height">50dp</dimen>
+</resources>
