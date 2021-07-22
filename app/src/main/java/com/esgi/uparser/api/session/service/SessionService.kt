@@ -1,7 +1,6 @@
 package com.esgi.uparser.api.session.service
 
 import android.content.Context
-import android.util.Log
 import com.esgi.uparser.LoginActivity
 import com.esgi.uparser.api.profile.service.ProfileService
 import com.esgi.uparser.api.provider.AppPreferences
@@ -74,6 +73,9 @@ class SessionService {
 
     fun disconnect(context: Context) {
         deleteToken()
+        deleteEmail()
+        deleteId()
+        setIsLoginToFalse()
         LoginActivity.navigateTo(context)
     }
 }
