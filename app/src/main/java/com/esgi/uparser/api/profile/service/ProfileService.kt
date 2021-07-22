@@ -1,29 +1,18 @@
 package com.esgi.uparser.api.profile.service
 
-import android.util.Log
-import com.esgi.uparser.api.profile.ProfileInterface
+import com.esgi.uparser.api.profile.controller.ProfileInterface
 import com.esgi.uparser.api.provider.ApiClient
-import com.esgi.uparser.api.provider.AppPreferences
-import com.google.gson.JsonObject
-import retrofit2.Call
+import com.esgi.uparser.api.profile.model.UserResponse
 import retrofit2.Callback
-import retrofit2.Response
 
 class ProfileService {
-    fun getInfoUser() {
-        val call: Call<JsonObject> = ApiClient.buildService(ProfileInterface::class.java).getInfoUser(AppPreferences.token,AppPreferences.email)
-
-        call.enqueue(object : Callback<JsonObject> {
-            override fun onResponse(call: Call<JsonObject>?, response: Response<JsonObject>?) {
-                Log.d("Profile", "Success ${response?.code()}")
-
-
-                //onResult(response?.body())
-            }
-            override fun onFailure(call: Call<JsonObject>?, t: Throwable?) {
-                Log.d("Profile", "Failure ${call?.request()}")
-                //onResult(null)
-            }
-        })
+    fun getUserByEmail(
+        authorization: String,
+        email: String,
+        callback: Callback<UserResponse>
+    ) {
+        val call =
+            ApiClient.buildService(ProfileInterface::class.java).getUserByEmail("Bearer $authorization", email);
+        call.enqueue(callback);
     }
 }

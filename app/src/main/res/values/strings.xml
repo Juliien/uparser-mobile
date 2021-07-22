@@ -5,7 +5,8 @@
     <string name="password_input">Mot de passe</string>
     <string name="login_btn">Connexion</string>
     <string name="catalogue">Catalogues</string>
+    <string name="main">Uparser</string>
     <string name="profile">Profil</string>
-    <string name="connection">Connexion</string>
+    <string name="user_detail">Profile</string>
     <string name="home">Accueil</string>
 </resources>
