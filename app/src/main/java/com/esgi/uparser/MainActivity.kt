@@ -1,14 +1,11 @@
 package com.esgi.uparser
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.esgi.uparser.api.provider.AppPreferences
-import com.esgi.uparser.fragments.CatalogueFragment
-import com.esgi.uparser.fragments.HomeFragment
-import com.esgi.uparser.fragments.LoginFragment
-import com.esgi.uparser.fragments.ProfileFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.esgi.uparser.api.session.service.SessionService
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,38 +13,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppPreferences.init(this)
-        setContentView(R.layout.main_activity)
-        loadFragment(HomeFragment())
+        setContentView(R.layout.activity_main)
 
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val sessionService = SessionService();
+        sessionService.testUserToken(AppPreferences.token)
 
-        bottomNavigation.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_catalogue -> {
-                    loadFragment(CatalogueFragment())
-                    true
-                }
-                R.id.navigation_home -> {
-                    loadFragment(HomeFragment())
-                    true
-                }
-                R.id.navigation_connection -> {
-                    if(!AppPreferences.isLogin) {
-                        loadFragment(LoginFragment())
-                    } else {
-                        loadFragment(ProfileFragment())
-                    }
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_content, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+    companion object {
+        fun navigateTo(context: Context) {
+            context.startActivity(Intent(context, MainActivity::class.java))
+        }
     }
 }
