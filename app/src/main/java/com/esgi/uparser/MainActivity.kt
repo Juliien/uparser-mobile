@@ -3,6 +3,7 @@ package com.esgi.uparser
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.esgi.uparser.api.provider.AppPreferences
 import com.esgi.uparser.api.session.service.SessionService
@@ -17,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
         val sessionService = SessionService();
         sessionService.testUserToken(AppPreferences.token)
-
     }
 
     companion object {

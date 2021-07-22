@@ -44,7 +44,7 @@ class UserDetailActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClick
 
         SessionService().testUserToken(AppPreferences.token)
 
-        if(AppPreferences.token == "" || AppPreferences.email == "") {
+        if(AppPreferences.token == "") {
             LoginActivity.navigateTo(this)
         } else {
             if (isNetworkConnected()) {
@@ -55,7 +55,6 @@ class UserDetailActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClick
                         response: Response<UserResponse>
                     ) {
                         loader?.visibility = View.GONE
-                        Log.d("Uparser", "fetch user data for detail page ${response}")
                         if (response.body() != null) {
                             userResponse = response.body()
                             setUserResponseData()

@@ -7,7 +7,6 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
@@ -16,7 +15,6 @@ import com.esgi.uparser.R
 import com.esgi.uparser.api.catalog.service.CatalogService
 import com.esgi.uparser.api.catalog.model.CodeResponse
 import com.esgi.uparser.api.code.service.CodeService
-import com.esgi.uparser.api.profile.service.ProfileService
 import com.esgi.uparser.api.provider.AppPreferences
 import com.esgi.uparser.api.session.service.SessionService
 import kotlinx.android.synthetic.main.activity_catalog_detail.*
@@ -64,9 +62,7 @@ class CatalogDetailActivity: AppCompatActivity(), CatalogViewHolder.OnCatalogCli
                             response: Response<List<CodeResponse>>
                         ) {
                             loader?.visibility = View.GONE
-                            Log.d("Uparser", "Success history ${response}")
                             history = response.body()
-                            Log.d("Uparser", "Success history body ${response.body()}")
                             historyRecyclerView.apply {
                                 layoutManager = LinearLayoutManager(this@CatalogDetailActivity)
                                 adapter = history?.let { CatalogAdapter(it, this@CatalogDetailActivity) }
@@ -74,7 +70,6 @@ class CatalogDetailActivity: AppCompatActivity(), CatalogViewHolder.OnCatalogCli
                         }
 
                         override fun onFailure(call: Call<List<CodeResponse>>, t: Throwable) {
-                            Log.d("Uparser", "Fail $call |||||||| $t")
                             noHistory?.visibility = View.VISIBLE
                             loader?.visibility = View.GONE
                             val toast = Toast.makeText(
@@ -94,7 +89,6 @@ class CatalogDetailActivity: AppCompatActivity(), CatalogViewHolder.OnCatalogCli
                         response: Response<CodeResponse>
                     ) {
                         loader?.visibility = View.GONE
-                        Log.d("Uparser", "Success code ${response}")
                         if (response.body() != null) {
                             code = response.body()
                             extensionStartValue?.text = code?.extensionStart
@@ -102,7 +96,6 @@ class CatalogDetailActivity: AppCompatActivity(), CatalogViewHolder.OnCatalogCli
                             languageValue?.text = code?.language
                             creatorValue?.text = "Anonymous"
                             if (code?.codeEncoded != null) {
-                                Log.d("Uparser", "code?.codeEncoded != null ${code!!.codeEncoded}")
                                 seeCodeButton.setOnClickListener {
                                     CodeDetailActivity.navigateTo(this@CatalogDetailActivity, code!!.codeEncoded)
                                 }
@@ -111,7 +104,6 @@ class CatalogDetailActivity: AppCompatActivity(), CatalogViewHolder.OnCatalogCli
                     }
 
                     override fun onFailure(call: Call<CodeResponse>, t: Throwable) {
-                        Log.d("Uparser", "Fail $call |||||||| $t")
                         loader?.visibility = View.GONE
                         val toast = Toast.makeText(
                             applicationContext,

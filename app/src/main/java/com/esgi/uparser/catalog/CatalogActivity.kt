@@ -7,7 +7,6 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.esgi.uparser.R
 import com.esgi.uparser.api.catalog.service.CatalogService
 import com.esgi.uparser.api.catalog.model.CodeResponse
-import com.esgi.uparser.api.provider.AppPreferences
 import kotlinx.android.synthetic.main.activity_catalog_recycler.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,7 +33,6 @@ class CatalogActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClickedL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalog_recycler)
 
-        AppPreferences.clear("token")
         loader?.visibility = View.VISIBLE
         noContent?.visibility = View.GONE
 
