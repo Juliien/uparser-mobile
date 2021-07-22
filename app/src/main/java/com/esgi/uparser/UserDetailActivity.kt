@@ -32,6 +32,12 @@ class UserDetailActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClick
     private var codes: List<CodeResponse>? = null
     private var shouldLogin: Boolean = false
 
+    companion object {
+        fun navigateTo(context: Context) {
+            context.startActivity(Intent(context, UserDetailActivity::class.java))
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_detail)
@@ -43,6 +49,10 @@ class UserDetailActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClick
         codeListTitleTextView?.text = "User codes list"
 
         SessionService().testUserToken(AppPreferences.token)
+
+        logOutButton.setOnClickListener{
+            SessionService().disconnect(this);
+        }
 
         if(AppPreferences.token == "") {
             LoginActivity.navigateTo(this)
@@ -108,12 +118,6 @@ class UserDetailActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClick
             UserEmail?.text = userResponse?.email
         } else {
             LoginActivity.navigateTo(this)
-        }
-    }
-
-    companion object {
-        fun navigateTo(context: Context) {
-            context.startActivity(Intent(context, UserDetailActivity::class.java))
         }
     }
 
