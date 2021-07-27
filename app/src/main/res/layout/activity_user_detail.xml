@@ -7,16 +7,6 @@
     android:background="@drawable/background"
     tools:context=".UserDetailActivity">
 
-    <fragment
-        android:id="@+id/fragmentBackButton"
-        android:name="com.esgi.uparser.fragments.BackButtonFragment"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/arrow_back_fragment_height"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/titleTextView"/>
-
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
@@ -28,7 +18,7 @@
         android:textSize="28sp"
         app:layout_constraintEnd_toStartOf="@id/logOutButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragmentBackButton"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/scrollView"/>
 
     <Button
