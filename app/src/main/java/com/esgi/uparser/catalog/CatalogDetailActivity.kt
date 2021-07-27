@@ -23,10 +23,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CatalogDetailActivity: AppCompatActivity(), CatalogViewHolder.OnCatalogClickedListener {
+class CatalogDetailActivity: AppCompatActivity(){
 
     private var code: CodeResponse? = null
-    private var history: List<CodeResponse>? = null
 
     companion object {
         private val PARAM1: String = "codeId"
@@ -48,41 +47,9 @@ class CatalogDetailActivity: AppCompatActivity(), CatalogViewHolder.OnCatalogCli
 
         val receivedCodeId = intent?.getStringExtra("codeId")
         loader?.visibility = View.VISIBLE
-//        scrollView?.visibility = View.GONE
-        noHistory?.visibility = View.GONE
 
         if (isNetworkConnected()) {
             if (receivedCodeId != null) {
-                if(AppPreferences.token == "" || AppPreferences.email == "") {
-                    noHistory?.visibility = View.VISIBLE
-                } else {
-                    CodeService().getCodeHistory(AppPreferences.token, receivedCodeId, object : Callback<List<CodeResponse>> {
-                        override fun onResponse(
-                            call: Call<List<CodeResponse>>,
-                            response: Response<List<CodeResponse>>
-                        ) {
-                            loader?.visibility = View.GONE
-                            history = response.body()
-                            historyRecyclerView.apply {
-                                layoutManager = LinearLayoutManager(this@CatalogDetailActivity)
-                                adapter = history?.let { CatalogAdapter(it, this@CatalogDetailActivity) }
-                            }
-                        }
-
-                        override fun onFailure(call: Call<List<CodeResponse>>, t: Throwable) {
-                            noHistory?.visibility = View.VISIBLE
-                            loader?.visibility = View.GONE
-                            val toast = Toast.makeText(
-                                applicationContext,
-                                "Error while loading list content",
-                                Toast.LENGTH_SHORT
-                            )
-                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
-                            toast.show()
-                        }
-                    })
-                }
-
                 CatalogService().getCodeById(receivedCodeId, object : Callback<CodeResponse>{
                     override fun onResponse(
                         call: Call<CodeResponse>,
@@ -135,12 +102,6 @@ class CatalogDetailActivity: AppCompatActivity(), CatalogViewHolder.OnCatalogCli
         } else {
             true
             // TODO("VERSION.SDK_INT < M")
-        }
-    }
-
-    override fun onCatalogClicked(code: CodeResponse?) {
-        if (code != null) {
-            navigateTo(this, code.id)
         }
     }
 }

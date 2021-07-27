@@ -12,24 +12,24 @@ import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.esgi.uparser.api.catalog.model.CodeResponse
-import com.esgi.uparser.api.catalog.service.CatalogService
+import com.esgi.uparser.api.code.model.CodeHistoryResponse
+import com.esgi.uparser.api.code.service.CodeService
 import com.esgi.uparser.api.profile.model.UserResponse
 import com.esgi.uparser.api.profile.service.ProfileService
 import com.esgi.uparser.api.provider.AppPreferences
 import com.esgi.uparser.api.session.service.SessionService
-import com.esgi.uparser.catalog.CatalogAdapter
-import com.esgi.uparser.catalog.CatalogDetailActivity
-import com.esgi.uparser.catalog.CatalogViewHolder
+import com.esgi.uparser.catalog.CodeDetailActivity
+import com.esgi.uparser.code.CodeAdapter
+import com.esgi.uparser.code.CodeViewHolder
 import kotlinx.android.synthetic.main.activity_user_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserDetailActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClickedListener {
+class UserDetailActivity : AppCompatActivity(), CodeViewHolder.OnCodeClickedListener {
 
     private var userResponse: UserResponse? = null
-    private var codes: List<CodeResponse>? = null
+    private var codes: List<CodeHistoryResponse>? = null
     private var shouldLogin: Boolean = false
 
     companion object {
@@ -76,12 +76,14 @@ class UserDetailActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClick
                         shouldLogin = true
                     }
                 })
-                CatalogService().getAllCodes(object : Callback<List<CodeResponse>> {
+                CodeService().getCodeHistory(AppPreferences.token, AppPreferences.id,object : Callback<List<CodeHistoryResponse>> {
                     override fun onResponse(
-                        call: Call<List<CodeResponse>>,
-                        response: Response<List<CodeResponse>>
+                        call: Call<List<CodeHistoryResponse>>,
+                        response: Response<List<CodeHistoryResponse>>
                     ) {
-                        getPossessCodeFromList(response.body())
+                        Log.d("user", "${response.body()?.size}")
+                        codes = response.body()
+//                        getPossessCodeFromList(response.body())
                         loader?.visibility = View.GONE
 
                         if (codes?.size == 0) {
@@ -90,12 +92,12 @@ class UserDetailActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClick
                         } else {
                             codeOfUserRecyclerView.apply {
                                 layoutManager = LinearLayoutManager(this@UserDetailActivity)
-                                adapter = codes?.let { CatalogAdapter(it, this@UserDetailActivity) }
+                                adapter = codes?.let { CodeAdapter(it, this@UserDetailActivity) }
                             }
                         }
                     }
 
-                    override fun onFailure(call: Call<List<CodeResponse>>, t: Throwable) {
+                    override fun onFailure(call: Call<List<CodeHistoryResponse>>, t: Throwable) {
                         loader?.visibility = View.GONE
                         val toast = Toast.makeText(
                             applicationContext,
@@ -121,9 +123,9 @@ class UserDetailActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClick
         }
     }
 
-    override fun onCatalogClicked(code: CodeResponse?) {
+    override fun onCodeClicked(code: CodeHistoryResponse?) {
         if (code != null) {
-            CatalogDetailActivity.navigateTo(this, code.id)
+            CodeDetailActivity.navigateTo(this, code.codeEncoded)
         }
     }
 
@@ -141,9 +143,9 @@ class UserDetailActivity : AppCompatActivity(), CatalogViewHolder.OnCatalogClick
         }
     }
 
-    private fun getPossessCodeFromList(codes: List<CodeResponse>?) {
-        if (codes != null) {
-            this.codes = codes.filter { x: CodeResponse? -> x?.userId == userResponse?.id }
-        }
-    }
+//    private fun getPossessCodeFromList(codes: List<CodeResponse>?) {
+//        if (codes != null) {
+//            this.codes = codes.filter { x: CodeResponse? -> x?.userId == userResponse?.id }
+//        }
+//    }
 }
