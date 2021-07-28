@@ -80,17 +80,19 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent=".0" />
 
-            <ImageView
+
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/UserDetailImage"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:contentDescription="user picture"
-                app:layout_constraintTop_toBottomOf="@+id/verticalGuidelineTopImage"
+                android:src="@drawable/telechargement"
+                app:civ_border_color="#2196F3"
+                app:civ_border_width="1dp"
                 app:layout_constraintBottom_toTopOf="@id/verticalGuidelineBottomImage"
                 app:layout_constraintEnd_toEndOf="@id/verticalGuidelineRightImage"
                 app:layout_constraintStart_toStartOf="@id/verticalGuidelineLeftImage"
-                app:srcCompat="@drawable/telechargement" />
+                app:layout_constraintTop_toBottomOf="@+id/verticalGuidelineTopImage" />
+
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/verticalGuidelineBottomImage"

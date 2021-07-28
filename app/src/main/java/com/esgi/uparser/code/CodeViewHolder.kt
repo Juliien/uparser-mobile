@@ -28,7 +28,7 @@ class CodeViewHolder (inflater: LayoutInflater, parent: ViewGroup) :
         loader = itemView.findViewById(R.id.loader)
         loader?.visibility = View.VISIBLE
         rankNumberTextView = itemView.findViewById(R.id.rankNumberTextView)
-        codeNameTextView = itemView.findViewById(R.id.codeNameTextView)
+        codeNameTextView = itemView.findViewById(R.id.extensionStartTextView)
         codeSubNameTextView = itemView.findViewById(R.id.codeSubNameTextView)
     }
 

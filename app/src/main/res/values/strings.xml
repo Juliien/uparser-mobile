@@ -12,7 +12,7 @@
     <string name="commentcamarchetitle"> Comment ça marche :</string>
     <string name="commentcamarche"> Selectionne ton parser dans le catalogue. Ensuite, importe ton fichier sur la plateforme, et enfin clique sur convertir</string>
     <string name="parsertitle"> C\'est quoi un parseur ?</string>
-    <string name="parser">Some quick example text to build on the card title and make up the bulk of the card\'s content.</string>
+    <string name="parser">"Parseur" est un terme provenant de l\'anglais "parser" désignant un programme informatique permetant l\'analyse syntaxique ainsi que la conversion de données.</string>
     <string name="devtitle"> je suis développeur !</string>
     <string name="dev"> Les développeur fournissent des codes pour parser ou convertir des données, par exemple du Json vers du Xml.</string>
 

@@ -29,12 +29,12 @@
         android:textSize="18sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/codeNameTextView"
+        app:layout_constraintEnd_toStartOf="@+id/extensionStartTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/codeNameTextView"
+        android:id="@+id/extensionStartTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -58,7 +58,34 @@
         android:layout_marginStart="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/rankNumberTextView"
-        app:layout_constraintTop_toBottomOf="@+id/codeNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/extensionStartTextView"
         android:layout_marginLeft="15dp" />
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/extensionStartTextView"
+        app:layout_constraintBottom_toTopOf="@id/codeSubNameTextView"
+        android:layout_marginLeft="15dp" />
+    <TextView
+        android:id="@+id/extensionEndTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:text="To"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/to"
+        app:layout_constraintBottom_toTopOf="@id/codeSubNameTextView"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

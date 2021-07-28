@@ -22,14 +22,18 @@ class CatalogViewHolder (inflater: LayoutInflater, parent: ViewGroup) :
     private var rankNumberTextView: TextView? = null
     private var catalogNameTextView: TextView? = null
     private var catalogSubNameTextView: TextView? = null
+    private var extensionStartTextView: TextView? = null
+    private var extensionEndTextView: TextView? = null
     private var onCatalogClickedListener: OnCatalogClickedListener? = null
 
     init {
         loader = itemView.findViewById(R.id.loader)
         loader?.visibility = View.VISIBLE
         rankNumberTextView = itemView.findViewById(R.id.rankNumberTextView)
-        catalogNameTextView = itemView.findViewById(R.id.codeNameTextView)
+        catalogNameTextView = itemView.findViewById(R.id.extensionStartTextView)
         catalogSubNameTextView = itemView.findViewById(R.id.codeSubNameTextView)
+        extensionStartTextView = itemView.findViewById(R.id.extensionStartTextView)
+        extensionEndTextView = itemView.findViewById(R.id.extensionEndTextView)
     }
 
     fun bind(rank: Int, code: CodeResponse, onCatalogClickedListener: OnCatalogClickedListener) {
@@ -40,6 +44,8 @@ class CatalogViewHolder (inflater: LayoutInflater, parent: ViewGroup) :
         rankNumberTextView?.text = "$rank"
         catalogNameTextView?.text = code.id
         catalogSubNameTextView?.text = code.userId
+        extensionStartTextView?.text = code.extensionStart
+        extensionEndTextView?.text = code.extensionEnd
 
         itemView.setOnClickListener(this)
     }
